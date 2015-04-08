@@ -12,7 +12,7 @@ $(document).ready(function() {
         if (circleNum == 1) {
             midiNote = 56;
         } else if (circleNum == 2) {
-            midiNote = 44;
+            midiNote = 46;
         } else if (circleNum == 3) {
             midiNote = 49;
         } else if (circleNum == 4) {
@@ -24,7 +24,7 @@ $(document).ready(function() {
         } else {
             return;
         }
-        $.post("/max/midi", {theText: midiNote});
+        $.post("/max/single_midi", {theText: midiNote});
     }
 
     $(document).keypress(function(event){
@@ -39,7 +39,7 @@ $(document).ready(function() {
             circleNumToMidi(3);
         } else if (keycode == 100) {
             circleNumToMidi(4);
-        } else if (keycode == 118) {
+        } else if (keycode == 98 || keycode == 118 || keycode == 99) {
             circleNumToMidi(5);
         } else if (keycode == 106) {
             circleNumToMidi(6);
