@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,75 +28,55 @@ namespace DrumKitUtil
             };
         }
 
-        private async Task SendNote(Note note)
+        private void SendNote(Note note)
         {
-            using (var client = new HttpClient())
-            {
-                var values = new Dictionary<string, string>
-                {
-                    {"midi_value",  note.MidiValue.ToString()},
-                    {"velocity",    note.Velocity.ToString()},
-                    {"duration",    note.Duration.ToString()}
-                };
+            System.Net.WebClient webClient = new System.Net.WebClient();
 
-                var content = new FormUrlEncodedContent(values);
-
-                var response = await client.PostAsync(_baseUrl + "/max/midi", content);
-
-                var responseString = await response.Content.ReadAsStringAsync();
-            }
+            webClient.Headers.Add("content-type", "application/json");//set your header here, you can add multiple headers
+            string s = Encoding.ASCII.GetString(webClient.UploadData(_baseUrl + "/max/midi", "POST", Encoding.Default.GetBytes("{\"midi_value\": " + note.MidiValue + ", \"velocity\": " + note.Velocity + ", \"duration\": " + note.Duration + "}")));
         }
 
-        private async Task ChangeChannel(int newChannel)
+        private void ChangeChannel(int newChannel)
         {
-            using (var client = new HttpClient())
-            {
-                var values = new Dictionary<string, string>
-                {
-                    {"channel",  newChannel.ToString()}
-                };
+            System.Net.WebClient webClient = new System.Net.WebClient();
 
-                var content = new FormUrlEncodedContent(values);
-
-                var response = await client.PostAsync(_baseUrl + "/max/channel", content);
-
-                var responseString = await response.Content.ReadAsStringAsync();
-            }
+            webClient.Headers.Add("content-type", "application/json");//set your header here, you can add multiple headers
+            string s = Encoding.ASCII.GetString(webClient.UploadData(_baseUrl + "/max/midi", "POST", Encoding.Default.GetBytes("{\"channel\": " + newChannel + "}")));
         }
 
-        public async Task PlayBassDrum(int velocity, int duration)
+        public void PlayBassDrum(int velocity, int duration)
         {
-            await SendNote(new Note(_soundMap["bass_drum"], velocity, duration));
+            SendNote(new Note(_soundMap["bass_drum"], velocity, duration));
         }
 
-        public async Task PlaySnareDrum(int velocity, int duration)
+        public void PlaySnareDrum(int velocity, int duration)
         {
-            await SendNote(new Note(_soundMap["snare_drum"], velocity, duration));
+            SendNote(new Note(_soundMap["snare_drum"], velocity, duration));
         }
 
-        public async Task PlayTom(int velocity, int duration)
+        public void PlayTom(int velocity, int duration)
         {
-            await SendNote(new Note(_soundMap["tom_drum"], velocity, duration));
+            SendNote(new Note(_soundMap["tom_drum"], velocity, duration));
         }
 
-        public async Task PlayCowbell(int velocity, int duration)
+        public void PlayCowbell(int velocity, int duration)
         {
-            await SendNote(new Note(_soundMap["cowbell"], velocity, duration));
+            SendNote(new Note(_soundMap["cowbell"], velocity, duration));
         }
 
-        public async Task PlayCrashCymbol(int velocity, int duration)
+        public void PlayCrashCymbol(int velocity, int duration)
         {
-            await SendNote(new Note(_soundMap["crash_cymbal"], velocity, duration));
+            SendNote(new Note(_soundMap["crash_cymbal"], velocity, duration));
         }
 
-        public async Task PlayHiHat(int velocity, int duration)
+        public void PlayHiHat(int velocity, int duration)
         {
-            await SendNote(new Note(_soundMap["hihat_cymbal"], velocity, duration));
+            SendNote(new Note(_soundMap["hihat_cymbal"], velocity, duration));
         }
 
-        public async Task ChangeDrumPack(int newChannel)
+        public void ChangeDrumPack(int newChannel)
         {
-            await ChangeChannel(newChannel);
+            ChangeChannel(newChannel);
         }
 
         private class Note

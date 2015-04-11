@@ -8,14 +8,14 @@ namespace DrumKitUtilTest
     [TestFixture]
     public class Http
     {
-        private string baseUrl;
-        private DrumKit drum;
+        private string _baseUrl;
+        private DrumKit _drum;
 
         [TestFixtureSetUp]
         public void Setup()
         {
-            baseUrl = "http://drumkit.ngrok.com";
-            drum = new DrumKit(baseUrl);
+            _baseUrl = "http://drumkit.ngrok.com";
+            _drum = new DrumKit(_baseUrl);
         }
 
         [TestFixtureTearDown]
@@ -25,45 +25,45 @@ namespace DrumKitUtilTest
         }
 
         [Test]
-        public async void HttpCrashTest()
+        public void HttpCrashTest()
         {
-            await drum.PlayCrashCymbol(127, 1000);
+            _drum.PlayCrashCymbol(127, 1000);
         }
 
         [Test]
-        public async void HttpBassTest()
+        public void HttpBassTest()
         {
-            await drum.PlayBassDrum(127, 1000);
+            _drum.PlayBassDrum(127, 1000);
         }
 
         [Test]
-        public async void HttpSnareTest()
+        public void HttpSnareTest()
         {
-            await drum.PlaySnareDrum(127, 1000);
+            _drum.PlaySnareDrum(127, 1000);
         }
 
         [Test]
-        public async void HttpTomTest()
+        public void HttpTomTest()
         {
-            await drum.PlayTom(127, 1000);
+            _drum.PlayTom(127, 1000);
         }
 
         [Test]
-        public async void HttpHihatTest()
+        public void HttpHihatTest()
         {
-            await drum.PlayHiHat(127, 1000);
+            _drum.PlayHiHat(127, 1000);
         }
 
         [Test]
-        public async void HttpCowbellTest()
+        public void HttpCowbellTest()
         {
-            await drum.PlayCowbell(127, 1000);
+            _drum.PlayCowbell(127, 1000);
         }
 
         [Test]
-        public async void HttpChannelTest()
+        public void HttpChannelTest()
         {
-            await drum.ChangeDrumPack(2);
+            _drum.ChangeDrumPack(2);
         }
     }
 }
