@@ -1,6 +1,4 @@
-﻿using System;
-using System.Dynamic;
-using DrumKitUtil;
+﻿using DrumKitUtil;
 using NUnit.Framework;
 
 namespace DrumKitUtilTest

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DrumKitUtil
 {
@@ -33,7 +29,7 @@ namespace DrumKitUtil
             System.Net.WebClient webClient = new System.Net.WebClient();
 
             webClient.Headers.Add("content-type", "application/json");//set your header here, you can add multiple headers
-            string s = Encoding.ASCII.GetString(webClient.UploadData(_baseUrl + "/max/midi", "POST", Encoding.Default.GetBytes("{\"midi_value\": " + note.MidiValue + ", \"velocity\": " + note.Velocity + ", \"duration\": " + note.Duration + "}")));
+            webClient.UploadData(_baseUrl + "/max/midi", "POST", Encoding.Default.GetBytes("{\"midi_value\": " + note.MidiValue + ", \"velocity\": " + note.Velocity + ", \"duration\": " + note.Duration + "}"));
         }
 
         private void ChangeChannel(int newChannel)
@@ -41,7 +37,7 @@ namespace DrumKitUtil
             System.Net.WebClient webClient = new System.Net.WebClient();
 
             webClient.Headers.Add("content-type", "application/json");//set your header here, you can add multiple headers
-            string s = Encoding.ASCII.GetString(webClient.UploadData(_baseUrl + "/max/midi", "POST", Encoding.Default.GetBytes("{\"channel\": " + newChannel + "}")));
+            webClient.UploadData(_baseUrl + "/max/midi", "POST", Encoding.Default.GetBytes("{\"channel\": " + newChannel + "}"));
         }
 
         public void PlayBassDrum(int velocity, int duration)
