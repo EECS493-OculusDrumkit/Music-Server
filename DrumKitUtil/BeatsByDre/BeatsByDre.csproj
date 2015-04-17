@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeatTimer.cs" />
     <Compile Include="DrumBeat.cs" />
     <Compile Include="DrumMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
